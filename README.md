@@ -38,6 +38,8 @@ src/hotel_rag/
 ├── generation.py    # Appel au LLM + construction du prompt
 ├── pipeline.py       # Orchestration : ingestion + retrieval + generation
 └── api.py           # API REST (FastAPI)
+
+app.py               # Interface Streamlit (démo interactive)
 ```
 
 Chaque étage a une responsabilité unique et une interface stable. Concrètement, ça veut dire :
@@ -52,6 +54,7 @@ Chaque étage a une responsabilité unique et une interface stable. Concrètemen
 - **Recherche vectorielle** : `numpy` (similarité cosinus par produit matriciel — voir *Limites et évolutions* ci-dessous)
 - **Génération** : `transformers` (`Qwen/Qwen2.5-0.5B-Instruct`)
 - **API** : `FastAPI` + `uvicorn`
+- **Interface web** : `Streamlit`
 - **Tests** : `pytest`, avec un embedder factice pour tester la logique de recherche sans dépendance réseau
 - **CI** : GitHub Actions (lint + tests à chaque push)
 - **Containerisation** : Docker
@@ -80,6 +83,13 @@ curl -X POST http://localhost:8000/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Le wifi est-il gratuit ?", "top_k": 2}'
 ```
+
+**Avec Streamlit (interface visuelle) :**
+```bash
+pip install streamlit
+streamlit run app.py
+```
+Ouvre une interface web sur `http://localhost:8501` avec un champ de question, un réglage du nombre de sources consultées (`top_k`), et l'affichage de la réponse accompagnée de ses sources. Le pipeline est chargé une seule fois grâce à `st.cache_resource`, donc seule la première question est un peu plus lente (chargement des modèles).
 
 **Avec Docker :**
 ```bash
