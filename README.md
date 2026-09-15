@@ -104,6 +104,3 @@ Ce projet assume des choix volontairement simples, adaptés à une documentation
 - **Modèle de génération volontairement petit** (0,5 milliard de paramètres) pour tourner sans GPU : un modèle plus gros ou une API (Claude, GPT) améliorerait la qualité rédactionnelle, sans changer l'architecture.
 - **Pas d'évaluation automatisée du pipeline** (jeu de questions/réponses de référence, métriques de retrieval) : à ajouter avant tout usage en production réelle.
 
-## Origine du projet
-
-Ce projet part d'un exercice pédagogique du [Cahier de Vacances 2026 de MachineLearnia](https://github.com/MachineLearnia/Cahier-Vacances-2026) (Projet 04), repensé et restructuré ici en repo de production : découpage en modules avec responsabilités uniques, tests automatisés, API REST, containerisation et CI.
